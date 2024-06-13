@@ -1,0 +1,94 @@
+version: "3.7"
+
+networks:
+  net-alice-kms:
+  net-alice:
+  net-bob:
+  net-public:
+
+services:
+  kms-alice:
+    command: start --config /root/tmkms/tmkms.toml
+    container_name: kms-alice
+    image: tmkms_i:v0.12.2
+    volumes:
+      - ../localnet/kms-alice:/root/tmkms
+    networks:
+      - net-alice-kms
+
+  val-alice:
+    command: run start
+    container_name: val-alice
+    image: cosmovisor
+    environment:
+      - DAEMON_NAME=selfchaind
+      - DAEMON_HOME=/root/.selfchain
+      - DAEMON_RESTART_AFTER_UPGRADE=false
+    volumes:
+      - ../localnet/val-alice:/root/.selfchain
+    networks:
+      - net-alice-kms
+      - net-alice
+    # The KMS connects to the node and can reconnect. So have val-alice start after kms-alice:
+    depends_on:
+      - kms-alice
+
+  sentry-alice:
+    command: run start
+    container_name: sentry-alice
+    image: cosmovisor
+    environment:
+      - DAEMON_NAME=selfchaind
+      - DAEMON_HOME=/root/.selfchain
+      - DAEMON_RESTART_AFTER_UPGRADE=false
+    volumes:
+       - ../localnet/sentry-alice:/root/.selfchain
+    networks:
+      - net-alice
+      - net-public
+
+  val-bob:
+    command: run start
+    container_name: val-bob
+    image: cosmovisor
+    environment:
+      - DAEMON_NAME=selfchaind
+      - DAEMON_HOME=/root/.selfchain
+      - DAEMON_RESTART_AFTER_UPGRADE=false
+    volumes:
+      - ../localnet/val-bob:/root/.selfchain
+    networks:
+      - net-bob
+
+  sentry-bob:
+    command: run start
+    container_name: sentry-bob
+    image: cosmovisor
+    environment:
+      - DAEMON_NAME=selfchaind
+      - DAEMON_HOME=/root/.selfchain
+      - DAEMON_RESTART_AFTER_UPGRADE=false
+    volumes:
+      - ../localnet/sentry-bob:/root/.selfchain
+    networks:
+      - net-bob
+      - net-public
+
+  node-carol:
+    command: run start
+    container_name: node-carol
+    image: cosmovisor
+    environment:
+      - DAEMON_NAME=selfchaind
+      - DAEMON_HOME=/root/.selfchain
+      - DAEMON_RESTART_AFTER_UPGRADE=false
+    # In order to make your host computer look like an open node, expose Carol's node on all addresses of your host
+    ports:
+      - 0.0.0.0:26657:26657
+      - 0.0.0.0:1317:1317
+      - 0.0.0.0:9090:9090
+      - 0.0.0.0:9091:9091
+    volumes:
+      - ../localnet/node-carol:/root/.selfchain
+    networks:
+      - net-public

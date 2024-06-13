@@ -1,0 +1,13 @@
+syntax = "proto3";
+package selfchain.migration;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "selfchain/x/migration/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+  uint64 hotcross_ratio = 1;
+}

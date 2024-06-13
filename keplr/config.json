@@ -1,0 +1,50 @@
+{
+  "bech32Config": {
+    "bech32PrefixAccAddr": "self",
+    "bech32PrefixAccPub": "selfpub",
+    "bech32PrefixValAddr": "selfvaloper",
+    "bech32PrefixValPub": "selfvaloperpub",
+    "bech32PrefixConsAddr": "selfvalcons",
+    "bech32PrefixConsPub": "selfvalconspub"
+  },
+  "bip44": {
+    "coinType": 118
+  },
+  "chainId": "self-1",
+  "chainName": "Self Chain",
+  "chainSymbolImageUrl": "https://raw.githubusercontent.com/hotcrosscom/self-chain-brand-assets/main/token/slf_logo.png",
+  "currencies": [
+    {
+      "coinDecimals": 6,
+      "coinDenom": "SLF",
+      "coinGeckoId": "slf",
+      "coinMinimalDenom": "uslf",
+      "coinImageUrl": "https://raw.githubusercontent.com/hotcrosscom/self-chain-brand-assets/main/token/slf_logo.png"
+    }
+  ],
+  "features": [],
+  "feeCurrencies": [
+    {
+      "coinDecimals": 6,
+      "coinDenom": "SLF",
+      "coinGeckoId": "slf",
+      "coinMinimalDenom": "uslf",
+      "coinImageUrl": "https://raw.githubusercontent.com/hotcrosscom/self-chain-brand-assets/main/token/slf_logo.png",
+      "gasPriceStep": {
+        "average": 0.025,
+        "high": 0.03,
+        "low": 0.005
+      }
+    }
+  ],
+  "rest": "https://api.selfchain.io",
+  "rpc": "https://rpc.selfchain.io:26657",
+  "stakeCurrency": {
+    "coinDecimals": 6,
+    "coinDenom": "SLF",
+    "coinGeckoId": "slf",
+    "coinMinimalDenom": "uslf",
+    "coinImageUrl": "https://raw.githubusercontent.com/hotcrosscom/self-chain-brand-assets/main/token/slf_logo.png"
+  },
+  "walletUrlForStaking": "https://staking.selfchain.xyz"
+}
