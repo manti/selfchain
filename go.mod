@@ -1,4 +1,4 @@
-module selfchain
+module github/manti/selfchain
 
 go 1.22
 
