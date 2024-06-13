@@ -1,7 +1,7 @@
 package types
 
 import (
-	selfvestingTypes "selfchain/x/selfvesting/types"
+	selfvestingTypes "github.com/manti/selfchain/x/selfvesting/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
